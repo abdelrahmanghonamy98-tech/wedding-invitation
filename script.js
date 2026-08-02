@@ -1,3 +1,26 @@
+// بداية ملف script.js
+document.addEventListener('DOMContentLoaded', () => {
+  const loaderScreen = document.getElementById('loaderScreen');
+  const progressFill = document.getElementById('progressFill');
+  const progressNum = document.getElementById('progressNum');
+
+  let progress = 0;
+  const loadInterval = setInterval(() => {
+    progress += 10;
+    if (progress >= 100) {
+      progress = 100;
+      clearInterval(loadInterval);
+      setTimeout(() => {
+        if (loaderScreen) {
+          loaderScreen.style.opacity = '0';
+          setTimeout(() => loaderScreen.style.display = 'none', 800);
+        }
+      }, 300);
+    }
+    if (progressFill) progressFill.style.width = `${progress}%`;
+    if (progressNum) progressNum.textContent = `${progress}%`;
+  }, 100);
+});
 import { 
   initFirebase, submitRSVP, submitGuestMessage, 
   fetchGuestMessages, trackVisit 
