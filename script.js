@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, 100);
 });
-
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Initialize Firebase & Analytics
   initFirebase();
