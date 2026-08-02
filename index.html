@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دعوة زفاف: عبدالرحمن & مايا</title>
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta name="description" content="يتشرف عبدالرحمن ومايا بدعوتكم لحضور حفل زفافهما في قاعة ماريوت يوم 27 يوليو 2027">
+  <meta property="og:title" content="دعوة زفاف عبدالرحمن & مايا">
+  <meta property="og:description" content="شاركونا فرحتنا في حفل زفافنا - 27 يوليو 2027">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/images/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- PWA Manifest & Theme -->
+  <meta name="theme-color" content="#C8A96A">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+  <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+  <link href="[https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap](https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap)" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "[https://schema.org](https://schema.org)",
+    "@type": "Event",
+    "name": "حفل زفاف عبدالرحمن ومايا",
+    "startDate": "2027-07-27T20:00:00+02:00",
+    "eventAttendanceMode": "[https://schema.org/OfflineEventAttendanceMode](https://schema.org/OfflineEventAttendanceMode)",
+    "eventStatus": "[https://schema.org/EventScheduled](https://schema.org/EventScheduled)",
+    "location": {
+      "@type": "Place",
+      "name": "Marriott Wedding Hall",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "EG"
+      }
+    },
+    "description": "حفل زفاف عبدالرحمن ومايا"
+  }
+  </script>
+</head>
+<body data-theme="light">
+
+  <!-- Glow Follower Cursor -->
+  <div class="custom-cursor" id="customCursor"></div>
+
+  <!-- Ambient Audio Track -->
+  <audio id="bgAudio" loop preload="auto">
+    <source src="assets/music/romantic-ambient.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Canvas Particle Overlay -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Animated Loading Screen -->
+  <div class="loader-screen" id="loaderScreen">
+    <div class="loader-content">
+      <div class="monogram-logo">A & M</div>
+      <div class="loader-ring"></div>
+      <p class="loader-text" id="loaderText">Loading Our Love Story...</p>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progressFill"></div>
+      </div>
+      <span class="progress-num" id="progressNum">0%</span>
+    </div>
+  </div>
+
+  <!-- Cinematic Grand Gate -->
+  <div class="cinematic-gate" id="cinematicGate">
+    <div class="gate-door gate-door-left">
+      <div class="door-pattern"></div>
+    </div>
+    <div class="gate-door gate-door-right">
+      <div class="door-pattern"></div>
+    </div>
+    <div class="gate-content">
+      <div class="gate-monogram">ع & م</div>
+      <h2 class="gate-title">أهلاً بكم في رحلة حبنا</h2>
+      <p class="gate-subtitle">يسعدنا حضوركم وتواجدكم معنا</p>
+      <button class="btn-primary gold-glow" id="btnEnterGate">
+        <span>ادخل لقصتنا</span>
+        <svg class="btn-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="main-header" id="mainHeader">
+    <nav class="nav-container">
+      <div class="nav-brand">A & M</div>
+      <div class="nav-links">
+        <a href="#hero">الرئيسية</a>
+        <a href="#story">قصتنا</a>
+        <a href="#gallery">المعرض</a>
+        <a href="#details">التفاصيل</a>
+        <a href="#rsvp">تأكيد الحضور</a>
+        <a href="#guestbook">تهنئة</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn" id="btnLanguage" title="تغيير اللغة / Switch Language">EN</button>
+        <button class="icon-btn" id="btnThemeToggle" title="تغيير الوضع">🌙</button>
+        <button class="icon-btn audio-toggle-btn" id="btnAudioToggle" title="الموسيقى">
+          <span class="audio-waves">
+            <span></span><span></span><span></span>
+          </span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="hero-backdrop">
+        <div class="hero-overlay"></div>
+        <div class="animated-gradient"></div>
+      </div>
+      
+      <div class="hero-content reveal-up">
+        <p class="hero-invitation-text">بسم الله الرحمن الرحيم</p>
+        <p class="hero-subtitle-top">يسرنا دعوتكم لحضور حفل زفاف</p>
+
+        <div class="names-wrapper">
+          <h1 class="groom-name">عبدالرحمن</h1>
+          <span class="heart-separator">♥</span>
+          <h1 class="bride-name">مايا</h1>
+        </div>
+
+        <p class="hero-tagline">Together Forever</p>
+
+        <div class="hero-date-badge">
+          <span>الثلاثاء، 27 يوليو 2027</span>
+          <small>8:00 مساءً</small>
+        </div>
+
+        <!-- Live Countdown -->
+        <div class="countdown-container" id="countdown">
+          <div class="countdown-card">
+            <span class="count-val" id="countDays">00</span>
+            <span class="count-lbl">يوم</span>
+          </div>
+          <div class="countdown-card">
+            <span class="count-val" id="countHours">00</span>
+            <span class="count-lbl">ساعة</span>
+          </div>
+          <div class="countdown-card">
+            <span class="count-val" id="countMinutes">00</span>
+            <span class="count-lbl">دقيقة</span>
+          </div>
+          <div class="countdown-card">
+            <span class="count-val" id="countSeconds">00</span>
+            <span class="count-lbl">ثانية</span>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#rsvp" class="btn-primary">تأكيد الحضور</a>
+          <button class="btn-secondary" id="btnAddToCal">إضافة للتقويم</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Love Story Timeline Section -->
+    <section class="story-section section-padding" id="story">
+      <div class="container">
+        <div class="section-header text-center reveal-up">
+          <h2 class="section-title">حكايتنا</h2>
+          <div class="gold-divider"></div>
+          <p class="section-subtitle">محطات في رحلة جمعت بين قلبين</p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item reveal-right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card glass-card">
+              <span class="timeline-date">اللقاء الأول</span>
+              <h3>شرارة البداية</h3>
+              <p>بدأت حكايتنا بنظرة واكتملت بتوافق الأرواح، حيث جمعتنا الأقدار لنتشارك نفس الرؤية والحلم.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal-left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card glass-card">
+              <span class="timeline-date">الخطوبة</span>
+              <h3>عهد وميثاق</h3>
+              <p>في ليلة ساحرة بحضور الأهل والأصدقاء، قطعنا عهداً بأن نصنع غداً أجمل سوياً.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal-right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card glass-card">
+              <span class="timeline-date">اليوم الكبير</span>
+              <h3>بداية الفصل الجديد</h3>
+              <p>نحتفل معكم اليوم ببدء رحلة الحياة الأبدية، متسلحين بالمودة والرحمة والدعوات الصالحة.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section class="gallery-section section-padding" id="gallery">
+      <div class="container">
+        <div class="section-header text-center reveal-up">
+          <h2 class="section-title">معرض الصور</h2>
+          <div class="gold-divider"></div>
+          <p class="section-subtitle">لحظات لا تُنسى وثقها الزمن</p>
+        </div>
+
+        <!-- Gallery Tabs -->
+        <div class="gallery-tabs reveal-up">
+          <button class="tab-btn active" data-tab="engagement">صور الخطوبة</button>
+          <button class="tab-btn" data-tab="childhood">صور الطفولة</button>
+        </div>
+
+        <!-- Tab 1: Engagement Grid -->
+        <div class="tab-content active" id="tab-engagement">
+          <div class="gallery-grid">
+            <div class="gallery-item glass-card reveal-scale" data-src="assets/gallery/eng-1.jpg">
+              <div class="img-placeholder">
+                <span>صورة الخطوبة 1</span>
+              </div>
+              <div class="item-overlay"><span>تكبير</span></div>
+            </div>
+            <div class="gallery-item glass-card reveal-scale" data-src="assets/gallery/eng-2.jpg">
+              <div class="img-placeholder">
+                <span>صورة الخطوبة 2</span>
+              </div>
+              <div class="item-overlay"><span>تكبير</span></div>
+            </div>
+            <div class="gallery-item glass-card reveal-scale" data-src="assets/gallery/eng-3.jpg">
+              <div class="img-placeholder">
+                <span>صورة الخطوبة 3</span>
+              </div>
+              <div class="item-overlay"><span>تكبير</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Childhood Grid -->
+        <div class="tab-content" id="tab-childhood">
+          <div class="gallery-grid">
+            <div class="gallery-item glass-card reveal-scale" data-src="assets/childhood/child-groom.jpg">
+              <div class="img-placeholder">
+                <span>عبدالرحمن في الطفولة</span>
+              </div>
+              <div class="item-overlay"><span>تكبير</span></div>
+            </div>
+            <div class="gallery-item glass-card reveal-scale" data-src="assets/childhood/child-bride.jpg">
+              <div class="img-placeholder">
+                <span>مايا في الطفولة</span>
+              </div>
+              <div class="item-overlay"><span>تكبير</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Event Details & Map -->
+    <section class="details-section section-padding" id="details">
+      <div class="container">
+        <div class="section-header text-center reveal-up">
+          <h2 class="section-title">تفاصيل الحفل</h2>
+          <div class="gold-divider"></div>
+          <p class="section-subtitle">يسعدنا حضوركم ومشاركتكم هذه اللحظة</p>
+        </div>
+
+        <div class="details-grid">
+          <div class="detail-card glass-card reveal-up">
+            <div class="card-icon">📅</div>
+            <h3>التاريخ</h3>
+            <p>الثلاثاء، 27 يوليو 2027</p>
+            <small>يرجى الحضور في الموعد المحدد</small>
+          </div>
+
+          <div class="detail-card glass-card reveal-up" style="transition-delay: 0.1s;">
+            <div class="card-icon">⏰</div>
+            <h3>الوقت</h3>
+            <p>08:00 مساءً</p>
+            <small>تفتح الأبواب الساعة 7:30 مساءً</small>
+          </div>
+
+          <div class="detail-card glass-card reveal-up" style="transition-delay: 0.2s;">
+            <div class="card-icon">🏛️</div>
+            <h3>المكان</h3>
+            <p>قاعة ماريوت للحفلات (Marriott Hall)</p>
+            <small>العنوان الموضح بالخريطة</small>
+          </div>
+
+          <div class="detail-card glass-card reveal-up" style="transition-delay: 0.3s;">
+            <div class="card-icon">📞</div>
+            <h3>للاستفسار</h3>
+            <p dir="ltr">+201002153783</p>
+            <a href="tel:+201002153783" class="btn-text">إجراء اتصال</a>
+          </div>
+        </div>
+
+        <!-- Embedded Map Box -->
+        <div class="map-wrapper glass-card reveal-up">
+          <div class="map-overlay-info">
+            <h3>قاعة ماريوت للحفلات</h3>
+            <a href="[https://maps.app.goo.gl/YEv2Rq7qQRgnV1Mi7?g_st=ic](https://maps.app.goo.gl/YEv2Rq7qQRgnV1Mi7?g_st=ic)" target="_blank" rel="noopener" class="btn-primary">
+              فتح في خرائط Google
+            </a>
+          </div>
+          <iframe 
+            src="[https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.123456789!2d31.234567!3d30.045678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAyJzQ0LjQiTiAzMcKwMTQnMDQuNCJF!5e0!3m2!1sar!2seg!4v1680000000000!5m2!1sar!2seg](https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.123456789!2d31.234567!3d30.045678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAyJzQ0LjQiTiAzMcKwMTQnMDQuNCJF!5e0!3m2!1sar!2seg!4v1680000000000!5m2!1sar!2seg)" 
+            width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section class="rsvp-section section-padding" id="rsvp">
+      <div class="container">
+        <div class="rsvp-card glass-card reveal-up">
+          <div class="section-header text-center">
+            <h2 class="section-title">تأكيد الحضور (RSVP)</h2>
+            <div class="gold-divider"></div>
+            <p class="section-subtitle">يرجى تأكيد حضوركم قبل تاريخ 10 يوليو 2027</p>
+          </div>
+
+          <form id="rsvpForm" class="custom-form">
+            <div class="form-group">
+              <label for="rsvpName">الاسم الكريم *</label>
+              <input type="text" id="rsvpName" name="name" required placeholder="أدخل اسمك بالكامل">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="rsvpPhone">رقم الهاتف *</label>
+                <input type="tel" id="rsvpPhone" name="phone" required placeholder="01xxxxxxxxx">
+              </div>
+              <div class="form-group">
+                <label for="rsvpGuests">عدد المرافقين *</label>
+                <select id="rsvpGuests" name="guests" required>
+                  <option value="1">فرد واحد (أنا فقط)</option>
+                  <option value="2">مرافق واحد (+1)</option>
+                  <option value="3">مرافقان (+2)</option>
+                  <option value="4">عائلة (+3 فأكثر)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>حالة الحضور *</label>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="attendance" value="attending" checked>
+                  <span>شرف لي الحضور</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="attendance" value="declined">
+                  <span>أعتذر عن الحضور</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="rsvpMessage">رسالة للعروسين (اختياري)</label>
+              <textarea id="rsvpMessage" name="message" rows="3" placeholder="اكتب كلمة طيبة للعروسين..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary btn-block" id="btnRsvpSubmit">
+              <span>إرسال التأكيد</span>
+            </button>
+          </form>
+
+          <div class="form-feedback hidden" id="rsvpFeedback"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Guestbook Section -->
+    <section class="guestbook-section section-padding" id="guestbook">
+      <div class="container">
+        <div class="section-header text-center reveal-up">
+          <h2 class="section-title">دفتر الزوار والتهاني</h2>
+          <div class="gold-divider"></div>
+          <p class="section-subtitle">شاركونا كلمتكم وتهانيكم القلبية</p>
+        </div>
+
+        <div class="guestbook-layout">
+          <!-- Form -->
+          <div class="guestbook-form-wrap glass-card reveal-right">
+            <h3>أضف تهنئة</h3>
+            <form id="guestbookForm" class="custom-form">
+              <div class="form-group">
+                <label for="gbName">الاسم *</label>
+                <input type="text" id="gbName" required placeholder="اسمك">
+              </div>
+              <div class="form-group">
+                <label for="gbMessage">التهنئة *</label>
+                <textarea id="gbMessage" required rows="4" placeholder="دعوة صادقة أو كلمة من القلب..."></textarea>
+              </div>
+              <button type="submit" class="btn-primary" id="btnGbSubmit">إرسال التهنئة</button>
+            </form>
+          </div>
+
+          <!-- Feed -->
+          <div class="guestbook-feed-wrap reveal-left">
+            <div class="messages-feed" id="messagesFeed">
+              <!-- Dynamically populated -->
+              <div class="feed-skeleton">جاري تحميل التهاني...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Floating Actions Bar -->
+  <div class="floating-actions">
+    <button class="float-btn" id="btnShareWhatsapp" title="مشاركة عبر واتساب">
+      📱
+    </button>
+    <button class="float-btn" id="btnCopyLink" title="نسخ رابط الدعوة">
+      🔗
+    </button>
+    <button class="float-btn hidden" id="btnBackToTop" title="للأعلى">
+      ↑
+    </button>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal" id="lightboxModal">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <img class="lightbox-content" id="lightboxImg" alt="صورة المعرض">
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container text-center">
+      <div class="footer-monogram">عبدالرحمن & مايا</div>
+      <p>شكراً لكونكم جزءاً من يومنا المميز</p>
+      <div class="visitor-badge">
+        عدد الزوار: <span id="visitorCount">...</span>
+      </div>
+      <p class="copyright">2027 © جميع الحقوق محفوظة</p>
+    </div>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
