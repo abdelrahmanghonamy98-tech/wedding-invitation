@@ -1,4 +1,3 @@
-// بداية ملف script.js
 document.addEventListener('DOMContentLoaded', () => {
   const loaderScreen = document.getElementById('loaderScreen');
   const progressFill = document.getElementById('progressFill');
@@ -6,25 +5,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let progress = 0;
   const loadInterval = setInterval(() => {
-    progress += 10;
+    progress += 20; // يزيد 20% كل 100 مللي ثانية
+    if (progressFill) progressFill.style.width = progress + '%';
+    if (progressNum) progressNum.textContent = progress + '%';
+
     if (progress >= 100) {
-      progress = 100;
       clearInterval(loadInterval);
       setTimeout(() => {
         if (loaderScreen) {
           loaderScreen.style.opacity = '0';
-          setTimeout(() => loaderScreen.style.display = 'none', 800);
+          setTimeout(() => {
+            loaderScreen.style.display = 'none';
+          }, 500);
         }
-      }, 300);
+      }, 200);
     }
-    if (progressFill) progressFill.style.width = `${progress}%`;
-    if (progressNum) progressNum.textContent = `${progress}%`;
   }, 100);
 });
-import { 
-  initFirebase, submitRSVP, submitGuestMessage, 
-  fetchGuestMessages, trackVisit 
-} from './firebase.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Initialize Firebase & Analytics
