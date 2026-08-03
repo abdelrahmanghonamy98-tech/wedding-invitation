@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دعوة زفاف عبدالرحمن & مايا</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- أغصان الزيتون الجانبية الناعمة -->
+  <div class="side-olive olive-left">
+    <svg viewBox="0 0 200 600" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#708238" stroke-width="2" fill="none" stroke-linecap="round">
+        <path d="M 20,600 C 40,400 30,200 150,20" stroke-width="3" />
+        <path d="M 40,450 Q 90,400 120,350" />
+        <path d="M 60,300 Q 110,250 140,200" />
+        <!-- الأوراق -->
+        <path d="M 80,410 Q 110,380 100,360 Q 75,390 80,410 Z" fill="#708238" fill-opacity="0.2" />
+        <path d="M 100,260 Q 130,230 120,210 Q 95,240 100,260 Z" fill="#708238" fill-opacity="0.2" />
+        <path d="M 120,100 Q 150,70 140,50 Q 115,80 120,100 Z" fill="#708238" fill-opacity="0.2" />
+        <!-- حبات زيتون -->
+        <circle cx="90" cy="390" r="4" fill="#556b2f" />
+        <circle cx="110" cy="240" r="4" fill="#556b2f" />
+      </g>
+    </svg>
+  </div>
+
+  <div class="side-olive olive-right">
+    <svg viewBox="0 0 200 600" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#708238" stroke-width="2" fill="none" stroke-linecap="round">
+        <path d="M 180,600 C 160,400 170,200 50,20" stroke-width="3" />
+        <path d="M 160,450 Q 110,400 80,350" />
+        <path d="M 140,300 Q 90,250 60,200" />
+        <!-- الأوراق -->
+        <path d="M 120,410 Q 90,380 100,360 Q 125,390 120,410 Z" fill="#708238" fill-opacity="0.2" />
+        <path d="M 100,260 Q 70,230 80,210 Q 105,240 100,260 Z" fill="#708238" fill-opacity="0.2" />
+        <path d="M 80,100 Q 50,70 60,50 Q 85,80 80,100 Z" fill="#708238" fill-opacity="0.2" />
+        <!-- حبات زيتون -->
+        <circle cx="110" cy="390" r="4" fill="#556b2f" />
+        <circle cx="90" cy="240" r="4" fill="#556b2f" />
+      </g>
+    </svg>
+  </div>
+
+  <!-- بوابة الانتقال السريعة بين الأقسام -->
+  <div id="sectionTransitionGate" class="section-gate">
+    <div class="sec-door-left"></div>
+    <div class="sec-door-right"></div>
+  </div>
+
+  <!-- 1. شاشة التحميل -->
+  <div id="loaderScreen">
+    <div class="loader-title">جاري تحميل الدعوة...</div>
+    <div class="loader-progress-bar">
+      <div id="progressFill"></div>
+    </div>
+    <div id="progressNum">0%</div>
+  </div>
+
+  <!-- 2. البوابة السينمائية الملكية (الواجهة الرئيسية) -->
+  <div id="cinematicGate">
+    <div class="royal-gate-container">
+      <div class="gate-background"></div>
+      <div class="gate-door door-left"></div>
+      <div class="gate-door door-right"></div>
+
+      <div class="gate-overlay-content">
+        <h1 class="wedding-title-gold">عبدالرحمن ❤️ مايا</h1>
+        <p class="wedding-subtitle-gold">يسرنا دعوتكم لحضور حفل زفافنا</p>
+        <button class="btn-royal-gold" id="btnEnterGate">
+          <span>افتح الدعوة</span>
+          <svg class="btn-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. القائمة العلوية -->
+  <header>
+    <div class="brand">A & M</div>
+    <nav>
+      <a href="#hero">الرئيسية</a>
+      <a href="#details">تفاصيل الحفل</a>
+      <a href="#gallery">المعرض</a>
+      <a href="#guestbook">الرسائل</a>
+    </nav>
+  </header>
+
+  <!-- 4. المحتوى الرئيسي -->
+  <main id="mainContent">
+    
+    <!-- قسم الترحيب الرئيسي + تفاصيل الحفل والعداد التنازلي -->
+    <section id="hero">
+      <div class="bismillah">بسم الله الرحمن الرحيم</div>
+	<div class="bismillah">{وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ}</div>
+
+      <h2>يسرنا دعوتكم لحضور حفل زفاف</h2>
+      <h1 class="main-names">عبدالرحمن ❤️ مايا</h1>
+      
+      <!-- التاريخ بالأرقام فقط -->
+      <p class="wedding-date">الثلاثاء، 27/7/2027 - 8:00 مساءً</p>
+
+      <!-- تفاصيل القاعة واللوكيشن -->
+      <div class="venue-info">
+        <h3 class="venue-name">📍 Marriott Wedding Hall</h3>
+        <a href="https://maps.app.goo.gl/9WwCJg4ABfQAscmq6?g_st=ic" target="_blank" class="location-btn">
+          <span>عرض الموقع على الخريطة</span>
+          <svg class="btn-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </a>
+      </div>
+
+      <!-- تفاصيل الحفل والعداد التنازلي -->
+      <div id="details" class="details-in-hero">
+        <p style="margin-bottom: 15px;">يسعدنا حضوركم ومشاركتكم هذه اللحظة 🌹</p>
+        <div class="cards-grid" style="max-width: 600px; margin: 0 auto;">
+          <div class="card">
+            <h3>العداد التنازلي لموعد الفرح</h3>
+            <div class="countdown-box">
+              <div class="time-unit"><span class="num" id="days">00</span><span class="label">يوم</span></div>
+              <div class="time-unit"><span class="num" id="hours">00</span><span class="label">ساعة</span></div>
+              <div class="time-unit"><span class="num" id="minutes">00</span><span class="label">دقيقة</span></div>
+              <div class="time-unit"><span class="num" id="seconds">00</span><span class="label">ثانية</span></div>
+            </div>
+            
+            <!-- زر الألعاب النارية الاحتفالي -->
+            <button class="btn-fireworks-icon" id="fireworksBtn" type="button" title="اضغط للاحتفال!">
+              🎆
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم المعرض والصور -->
+    <section id="gallery">
+      <!-- الجملة الأولى والصورة eng-5 -->
+      <div class="intro-block">
+        <p class="subtitle-text">بداية رحلة جديدة ملؤها الحب والمودة ✨</p>
+        <div class="single-photo-container scroll-animate">
+          <img src="assets/gallery/eng-5.jpg" alt="بداية رحلة جديدة" class="centered-photo">
+        </div>
+      </div>
+
+      <!-- الجملة الثانية والصور eng-1 إلى eng-4 بالترتيب -->
+      <div class="gallery-sequence-block">
+        <p class="subtitle-text photos-heading">لحظات لا تُنسى وثّقها الزمن 📸</p>
+        
+        <div class="vertical-photos-list">
+          <div class="photo-wrapper scroll-animate">
+            <img src="assets/gallery/eng-1.jpg" alt="لحظات متميزة 1" class="centered-photo">
+          </div>
+          <div class="photo-wrapper scroll-animate">
+            <img src="assets/gallery/eng-2.jpg" alt="لحظات متميزة 2" class="centered-photo">
+          </div>
+          <div class="photo-wrapper scroll-animate">
+            <img src="assets/gallery/eng-3.jpg" alt="لحظات متميزة 3" class="centered-photo">
+          </div>
+          <div class="photo-wrapper scroll-animate">
+            <img src="assets/gallery/eng-4.jpg" alt="لحظات متميزة 4" class="centered-photo">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم دفتر الرسائل -->
+    <section id="guestbook">
+      <h2>دفتر التهاني والذكرى 💌</h2>
+      <p>اتركوا للعروسين كلمة دافئة للذكرى</p>
+
+      <div class="card message-form-card">
+        <form id="wishesForm">
+          <input type="text" id="guestName" placeholder="اسمك الكريم" required class="input-field">
+          <textarea id="guestMessage" placeholder="اكتب تهنئتك أو رسالتك هنا..." required class="input-field textarea"></textarea>
+          <button type="submit" class="btn-primary" style="margin-top: 15px;">إرسال التهنئة ✨</button>
+        </form>
+      </div>
+
+      <div class="cards-grid" id="wishesList"></div>
+    </section>
+
+  </main>
+
+  <!-- 5. التذييل -->
+  <footer>
+    <h3>عبدالرحمن & مايا</h3>
+    <p>شكراً لكونكم جزءاً من يومنا المميز</p>
+    <p class="copyright">© 2027 جميع الحقوق محفوظة</p>
+  </footer>
+
+  <script src="script.js"></script>
+<!-- عنصر خلفية الموسيقى -->
+<audio id="weddingMusic" loop preload="auto">
+  <source src="assets/music/The-Wedding.Cinematic Music By Brian Withycombe.mp3" type="audio/mpeg">
+  عذراً، متصفحك لا يدعم تشغيل الملفات الصوتية.
+<!-- زر التحكم بالموسيقى العائم -->
+<button id="toggleMusicBtn" class="music-toggle-btn" title="كتم / تشغيل الموسيقى" aria-label="Toggle Audio">
+  <span id="musicIcon">🔊</span>
+</button>
+</audio>
+</body>
+</html>

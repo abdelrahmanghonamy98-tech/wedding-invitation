@@ -1,0 +1,688 @@
+:root {
+  --primary-gold: #c5a059;
+  --dark-gold: #9e7d3b;
+  --gold-glow: rgba(197, 160, 89, 0.4);
+  --bg-cream: #faf8f5;
+  --white: #ffffff;
+  --text-dark: #2b2b2b;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Amiri', serif, Tahoma, sans-serif;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-dark);
+  direction: rtl;
+  overflow-x: hidden;
+  line-height: 1.8;
+  position: relative;
+}
+
+/* ==========================================
+   1. أغصان الزيتون الجانبية الصغيرة (في البداية فقط)
+   ========================================== */
+.side-olive {
+  position: absolute;
+  top: 100px;
+  width: 140px;
+  height: 450px;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.olive-left { left: 10px; }
+.olive-right { right: 10px; }
+
+.side-olive svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ==========================================
+   2. أنميشن الورود المتطايرة في الخلفية
+   ========================================== */
+.flowers-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  top: -10%;
+  border-radius: 15px 0px 15px 0px;
+  background: linear-gradient(135deg, #fce4ec, #f8bbd0, #e8b4b8);
+  opacity: 0.7;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  animation: floatPetal linear infinite;
+}
+
+.petal:nth-child(even) {
+  border-radius: 0px 15px 0px 15px;
+  background: linear-gradient(135deg, #fff0f5, #f3d1dc);
+}
+
+@keyframes floatPetal {
+  0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(110vh) rotate(720deg) translateX(100px); opacity: 0; }
+}
+
+/* ==========================================
+   3. تأثير الألعاب النارية
+   ========================================== */
+.firework-particle {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  animation: explodeFull 1.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes explodeFull {
+  0% { transform: translate(0, 0) scale(1.2); opacity: 1; }
+  50% { opacity: 1; filter: drop-shadow(0 0 12px currentColor); }
+  100% { transform: translate(var(--dx), var(--dy)) scale(0.1); opacity: 0; }
+}
+
+.btn-fireworks-icon {
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #d4af37, #c5a059);
+  border: 1px solid rgba(255, 215, 0, 0.6);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 15px var(--gold-glow);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+  outline: none;
+}
+
+.btn-fireworks-icon:hover {
+  transform: scale(1.15) rotate(12deg);
+  box-shadow: 0 0 22px rgba(212, 175, 55, 0.8);
+}
+
+.btn-fireworks-icon:active { transform: scale(0.9); }
+
+/* ==========================================
+   4. تفاصيل القاعة واللوكيشن
+   ========================================== */
+.venue-info {
+  margin: 20px auto 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.venue-name {
+  font-size: 1.4rem;
+  color: var(--primary-gold);
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.location-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border: 1px solid var(--primary-gold);
+  border-radius: 25px;
+  color: var(--primary-gold);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: bold;
+  background: rgba(197, 160, 89, 0.05);
+  transition: all 0.3s ease;
+}
+
+.location-btn:hover {
+  background: var(--primary-gold);
+  color: var(--white);
+  box-shadow: 0 4px 15px var(--gold-glow);
+  transform: translateY(-2px);
+}
+
+.location-btn .btn-icon { width: 16px; height: 16px; }
+
+/* ==========================================
+   5. شاشة التحميل
+   ========================================== */
+#loaderScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-cream);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease;
+}
+
+.loader-title {
+  font-size: 1.2rem;
+  color: var(--primary-gold);
+  margin-bottom: 10px;
+}
+
+.loader-progress-bar {
+  width: 220px;
+  height: 6px;
+  background-color: #e8e2d8;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#progressFill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-gold), #e6c585);
+  transition: width 0.1s linear;
+}
+
+#progressNum {
+  margin-top: 10px;
+  font-weight: bold;
+  color: var(--primary-gold);
+  font-size: 1.1rem;
+}
+
+/* ==========================================
+   6. البوابة السينمائية الملكية
+   ========================================== */
+#cinematicGate {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  overflow: hidden;
+  perspective: 1200px;
+  transition: opacity 1.8s ease-in-out, visibility 1.8s ease-in-out;
+}
+
+.royal-gate-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gate-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(0,0,0,0.1) 0%, rgba(11,11,13,0.85) 100%);
+  z-index: 1;
+}
+
+.gate-door {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 2;
+  background: url('gate-bg.jpg') no-repeat;
+  background-size: 200% 100%;
+  transition: transform 3.2s cubic-bezier(0.25, 1, 0.3, 1);
+  transform-style: preserve-3d;
+}
+
+.door-left {
+  left: 0;
+  background-position: left center;
+  transform-origin: left center;
+  border-right: 1px solid rgba(255, 215, 0, 0.4);
+}
+
+.door-right {
+  right: 0;
+  background-position: right center;
+  transform-origin: right center;
+  border-left: 1px solid rgba(255, 215, 0, 0.4);
+}
+
+#cinematicGate.open .door-left { transform: rotateY(-115deg); }
+#cinematicGate.open .door-right { transform: rotateY(115deg); }
+
+#cinematicGate.open .gate-overlay-content {
+  opacity: 0;
+  transform: scale(0.85);
+  transition: all 1.2s ease-out;
+}
+
+#cinematicGate.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.gate-overlay-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 35px 50px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.wedding-title-gold {
+  font-size: 2.8rem;
+  color: #f7e7ce;
+  text-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+  margin-bottom: 5px;
+}
+
+.wedding-subtitle-gold {
+  font-size: 1.2rem;
+  color: #e5d3b3;
+  margin-bottom: 25px;
+}
+
+.btn-royal-gold {
+  padding: 14px 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #f39c12, #d4af37, #aa7c11);
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+}
+
+.btn-royal-gold:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 35px rgba(212, 175, 55, 0.9);
+}
+
+/* ==========================================
+   7. بوابة الانتقال والهيدر والمحتوى
+   ========================================== */
+.section-gate {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1500;
+  pointer-events: none;
+  display: flex;
+}
+
+.sec-door-left, .sec-door-right {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background-color: var(--bg-cream);
+  transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.sec-door-left {
+  left: 0;
+  transform: translateX(-100%);
+  border-left: 2px solid var(--primary-gold);
+}
+
+.sec-door-right {
+  right: 0;
+  transform: translateX(100%);
+  border-right: 2px solid var(--primary-gold);
+}
+
+.section-gate.active .sec-door-left,
+.section-gate.active .sec-door-right {
+  transform: translateX(0);
+}
+
+.btn-primary {
+  padding: 12px 35px;
+  font-size: 1.15rem;
+  background: linear-gradient(135deg, #d4af37, #aa7c11);
+  color: var(--white);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 18px var(--gold-glow);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(197, 160, 89, 0.6);
+}
+
+.btn-icon { width: 18px; height: 18px; }
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(250, 248, 245, 0.95);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+}
+
+.brand {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--primary-gold);
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text-dark);
+  margin: 0 12px;
+  font-size: 1.05rem;
+  transition: color 0.3s ease;
+}
+
+nav a:hover { color: var(--primary-gold); }
+
+main {
+  position: relative;
+  z-index: 10;
+  padding-top: 100px;
+  width: 100%;
+}
+
+section {
+  padding: 50px 20px;
+  max-width: 1050px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+
+.bismillah {
+  font-size: 1.3rem;
+  color: var(--primary-gold);
+  margin-bottom: 10px;
+}
+
+.main-names {
+  font-size: 3rem;
+  color: var(--primary-gold);
+  margin: 15px 0;
+}
+
+.wedding-date {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* ==========================================
+   8. قسم المعرض (عرض الصور بالكامل دون قص)
+   ========================================== */
+.subtitle-text {
+  font-size: 1.5rem;
+  color: var(--primary-gold);
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+
+.photos-heading { margin-top: 50px; }
+
+.single-photo-container, .photo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 35px;
+  width: 100%;
+}
+
+/* تعديل عرض الصور لتعرض بالكامل وملاءمة الشاشة */
+.centered-photo {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  max-height: 75vh;       /* الارتفاع يتناسب تلقائياً مع الشاشة */
+  object-fit: contain;    /* 👈 تضمن ظهور كامل الصورة بدون قص أطرافها */
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  display: block;
+  margin: 0 auto;
+}
+
+.vertical-photos-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================
+   9. البطاقات والرسائل والعداد
+   ========================================== */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 35px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(5px);
+  padding: 30px 20px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.03);
+  border: 1px solid rgba(197, 160, 89, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.countdown-box { display: flex; gap: 15px; margin: 20px 0; }
+
+.time-unit { display: flex; flex-direction: column; align-items: center; }
+
+.time-unit .num { 
+  font-size: 1.8rem; 
+  font-weight: bold; 
+  color: var(--primary-gold);
+  transition: all 0.4s ease-in-out; /* حركة انسيابية للعداد */
+  display: inline-block;
+}
+
+.time-unit .label { font-size: 0.85rem; color: #666; }
+
+.message-form-card { max-width: 500px; margin: 20px auto; width: 100%; }
+
+.input-field {
+  width: 100%;
+  padding: 12px 15px;
+  margin-top: 10px;
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  border-radius: 10px;
+  background: var(--bg-cream);
+  font-size: 1rem;
+  outline: none;
+}
+
+.input-field:focus { border-color: var(--primary-gold); }
+.textarea { height: 100px; resize: none; }
+
+/* بطاقات التهنئة وزر الحذف الخفي للمسؤول */
+.wishes-card {
+  position: relative;
+  text-align: right;
+  align-items: flex-start;
+  border-right: 4px solid var(--primary-gold);
+}
+
+.delete-wish-btn {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: transparent;
+  border: none;
+  color: #d9534f;
+  cursor: pointer;
+  font-size: 0.9rem;
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
+}
+
+.delete-wish-btn:hover { opacity: 1; }
+
+.wishes-author { font-weight: bold; color: var(--primary-gold); margin-bottom: 5px; }
+
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #f3eee6;
+  border-top: 1px solid rgba(197, 160, 89, 0.2);
+  margin-top: 60px;
+  position: relative;
+  z-index: 10;
+}
+
+footer h3 { color: var(--primary-gold); margin-bottom: 5px; }
+.copyright { font-size: 0.85rem; color: #888; margin-top: 15px; }
+
+/* ==========================================
+   10. التجاوب مع الجوال (Mobile Responsive)
+   ========================================== */
+@media (max-width: 768px) {
+  .gate-overlay-content { padding: 25px 20px; width: 85%; }
+  .wedding-title-gold { font-size: 2rem; }
+  .subtitle-text { font-size: 1.25rem; }
+  
+  .centered-photo { 
+    max-height: 60vh; 
+    width: 100%;
+  }
+  
+  .side-olive {
+    width: 70px;
+    height: 300px;
+    opacity: 0.25;
+  }
+}
+
+/* ==========================================
+   11. تأثير الورق اللميع (Confetti/Glitter) للتهنئة
+   ========================================== */
+.glitter-particle {
+  position: absolute;
+  top: -20px;
+  z-index: 9999 !important;
+  pointer-events: none;
+  animation: fallGlitter linear forwards;
+  box-shadow: 0 0 10px currentColor;
+}
+
+@keyframes fallGlitter {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(115vh) rotate(1080deg) scale(0.3);
+    opacity: 0;
+  }
+}
+/* ==========================================
+   زر كتم / تشغيل الموسيقى العائم
+   ========================================== */
+.music-toggle-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 1001;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d4af37, #c5a059);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.music-toggle-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(197, 160, 89, 0.8);
+}
+
+.music-toggle-btn.muted {
+  background: #777;
+  opacity: 0.8;
+}
