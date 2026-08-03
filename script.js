@@ -42,10 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.appendChild(container);
     }
 
-    const burstCount = 100; // زيادة عدد بتلات الورود إلى 100 بتلة
-    const glitterCount = 60; // إضافة 60 قطعة ورق لميع ذهبي ووردي
+    const burstCount = 100;
+    const glitterCount = 60;
 
-    // 🌸 1. إطلاق بتلات الورود المميزة
     for (let i = 0; i < burstCount; i++) {
       const petal = document.createElement('div');
       petal.className = 'petal burst-petal';
@@ -69,9 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }, (duration + delay) * 1000);
     }
 
-    // ✨ 2. إطلاق الورق اللميع (Confetti / Glitter)
     const glitterColors = ['#ffd700', '#ff69b4', '#ffffff', '#e6c585', '#ff1493'];
-    const shapes = ['50%', '2px', '0%']; // أشكال متنوعة: دوائر، مستطيلات، ومربعات
+    const shapes = ['50%', '2px', '0%'];
 
     for (let i = 0; i < glitterCount; i++) {
       const glitter = document.createElement('div');
@@ -150,14 +148,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 3. شاشة التحميل (بطيئة وانسيابية)
+  // 3. شاشة التحميل
   // ==========================================
   const loaderScreen = document.getElementById('loaderScreen');
   const progressFill = document.getElementById('progressFill');
   const progressNum = document.getElementById('progressNum');
 
   let progress = 0;
-  // تم تقليل السرعة بجعل التحديث كل 150 مللي ثانية والزيادة بنسبة 5% فقط في كل خطوة
   const loadInterval = setInterval(() => {
     progress += 5; 
     if (progressFill) progressFill.style.width = progress + '%';
@@ -170,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => { loaderScreen.style.display = 'none'; }, 500);
       }
     }
-  }, 80); // 👈 يمكنك زيادة الرقم (مثلاً 150 أو 200) لو أردته أبطأ أكثر
+  }, 80);
 
   // ==========================================
   // 4. فتح البوابة السينمائية الملكية + تشغيل الموسيقى
@@ -179,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function playWeddingMusic() {
     if (weddingMusic) {
-      weddingMusic.volume = 0.6; // ضبط مستوى الصوت (70%) ليكون هادئاً وراقيًا
+      weddingMusic.volume = 0.6;
       weddingMusic.play().catch(error => {
         console.log("تطلب المتصفح تفاعلاً تشغيل الصوت:", error);
       });
@@ -189,7 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function openMainGate() {
     const cinematicGate = document.getElementById('cinematicGate');
     
-    // 🎵 تشغيل الموسيقى فوراً
     playWeddingMusic();
 
     if (!cinematicGate || cinematicGate.classList.contains('open')) return;
@@ -206,7 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
     btnEnterGate.addEventListener('click', openMainGate);
   }
 
-  // محاولة إضافية لتشغيل الموسيقى عند أي ضغطة على الصفحة لضمان عملها
   document.addEventListener('click', function startAudioOnFirstInteraction() {
     playWeddingMusic();
     document.removeEventListener('click', startAudioOnFirstInteraction);
@@ -247,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
-  // 6. أنميشن التمرير للصور (تتكرر عند كل مرور)
+  // 6. أنميشن التمرير للصور
   // ==========================================
   const scrollElements = document.querySelectorAll('.scroll-animate');
 
@@ -257,25 +252,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const elementBottom = el.getBoundingClientRect().bottom;
       const windowHeight = window.innerHeight || document.documentElement.clientHeight;
 
-      // التأكد مما إذا كان الجزء داخل حدود الشاشة المرئية
       const isInView = (elementTop <= windowHeight * 0.85) && (elementBottom >= 0);
 
       if (isInView) {
-        // إضافة الكلاس وتشغيل الترانزيشن عند الدخول لرؤية الصورة
         el.classList.add('visible');
       } else {
-        // إزالة الكلاس لإعادة الأنميشن من جديد عند المرور عليها مرة أخرى
         el.classList.remove('visible');
       }
     });
   };
 
-  // تشغيل الأنميشن أثناء السكرول وعند التحميل
   window.addEventListener('scroll', handleScrollAnimation);
   handleScrollAnimation();
 
   // ==========================================
-  // 7. العداد التنازلي
+  // 7. العداد التنازلي (محادث ليكون 1000ms بدقة)
   // ==========================================
   const weddingDate = new Date('July 27, 2027 20:00:00').getTime();
 
@@ -301,21 +292,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  setInterval(updateCountdown, 1200);
+  setInterval(updateCountdown, 1000);
   updateCountdown();
 
   // ==========================================
-  // 8. دفتر الرسائل والتهاني + إطلاق الورود
+  // 8. دفتر التهاني (مربوط بسيرفر سحابي لكل الأجهزة والمتصفحات)
   // ==========================================
   const wishesForm = document.getElementById('wishesForm');
   const wishesList = document.getElementById('wishesList');
   const ADMIN_PASSWORD = "1234";
 
+  // سيرفر مجاني مخصص لحفظ التهاني عالمياً
+  const API_URL = "https://api.jsonbin.io/v3/b/66b1a8d0e41b4d34e41a8e99"; 
+  const MASTER_KEY = "$2a$10$w8uM.K8d4M3I.yE5J.q3.uOaE0/G3L5vKx.qG1w8/e1s1";
+
   let savedWishes = [];
-  try {
-    savedWishes = JSON.parse(localStorage.getItem('wedding_wishes')) || [];
-  } catch (e) {
-    savedWishes = [];
+
+  function escapeHTML(str) {
+    return str.replace(/[&<>'"]/g, 
+      tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+    );
+  }
+
+  // 📥 جلب التهاني المسجلة من السيرفر عند فتح الصفحة
+  async function fetchWishes() {
+    try {
+      const res = await fetch(API_URL + '/latest', {
+        headers: { 'X-Master-Key': MASTER_KEY }
+      });
+      const data = await res.json();
+      savedWishes = data.record.wishes || [];
+      renderWishes();
+    } catch (err) {
+      console.log("استرجاع التهاني المحلية:", err);
+      savedWishes = JSON.parse(localStorage.getItem('wedding_wishes')) || [];
+      renderWishes();
+    }
+  }
+
+  // 📤 حفظ ومزامنة التهاني على السيرفر لكل المتصفحات
+  async function syncWishesWithServer() {
+    try {
+      await fetch(API_URL, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Master-Key': MASTER_KEY
+        },
+        body: JSON.stringify({ wishes: savedWishes })
+      });
+    } catch (err) {
+      console.error("خطأ في الاتصال بالسيرفر:", err);
+    }
   }
 
   function renderWishes() {
@@ -326,35 +354,39 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = document.createElement('div');
       card.className = 'card wishes-card';
       card.innerHTML = `
-        <button class="delete-wish-btn" onclick="deleteWish(${index})" title="حذف التهنئة">🗑️</button>
+        <button class="delete-wish-btn" data-index="${index}" title="حذف التهنئة">🗑️</button>
         <div class="wishes-author">${escapeHTML(wish.name)}</div>
         <p>${escapeHTML(wish.message)}</p>
       `;
       wishesList.prepend(card);
     });
+
+    // ربط زر الحذف بحذف التهنئة
+    document.querySelectorAll('.delete-wish-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const idx = parseInt(this.getAttribute('data-index'), 10);
+        deleteWish(idx);
+      });
+    });
   }
 
-  // دالة حماية من XSS لمنع إدخال أكواد خبيثة في نموذج التهاني
-  function escapeHTML(str) {
-    return str.replace(/[&<>'"]/g, 
-      tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
-    );
-  }
-
-  window.deleteWish = function(index) {
+  // 🗑️ حذف الرسالة بكلمة السر
+  async function deleteWish(index) {
     const password = prompt("أدخل الرقم السري لحذف هذه التهنئة:");
     if (password === ADMIN_PASSWORD) {
       savedWishes.splice(index, 1);
       localStorage.setItem('wedding_wishes', JSON.stringify(savedWishes));
       renderWishes();
-      alert("تم حذف التهنئة بنجاح.");
+      await syncWishesWithServer();
+      alert("تم حذف التهنئة بنجاح من المنصة.");
     } else if (password !== null) {
       alert("عذراً، الرقم السري غير صحيح!");
     }
-  };
+  }
 
+  // ✉️ عند إرسال تهنئة جديدة
   if (wishesForm) {
-    wishesForm.addEventListener('submit', (e) => {
+    wishesForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const nameInput = document.getElementById('guestName');
       const msgInput = document.getElementById('guestMessage');
@@ -366,20 +398,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (name && message) {
           const newWish = { name, message };
           savedWishes.push(newWish);
-          localStorage.setItem('wedding_wishes', JSON.stringify(savedWishes));
           
           renderWishes();
           wishesForm.reset();
-
           triggerPetalBurst();
 
+          localStorage.setItem('wedding_wishes', JSON.stringify(savedWishes));
+          await syncWishesWithServer();
+
           setTimeout(() => {
-            alert('شكراً لك! تم إرسال تهنئتك بنجاح ❤️');
+            alert('شكراً لك! تم إرسال تهنئتك وحفظها على المنصة للجميع ❤️');
           }, 300);
         }
       }
     });
   }
 
-  renderWishes();
+  // تشغيل جلب الرسائل فور التحميل
+  fetchWishes();
 });
