@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   createPetals();
 
   // ==========================================
-  // 1-ب. دالة انفجار بتلات الورود الكثيفة والورق اللميع (عند إرسال التهنئة)
+  // 1-ب. دالة انفجار بتلات الورود والورق اللميع
   // ==========================================
   function triggerPetalBurst() {
     let container = document.querySelector('.flowers-container');
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 80);
 
   // ==========================================
-  // 4. فتح البوابة السينمائية الملكية + تشغيل الموسيقى
+  // 4. فتح البوابة السينمائية الملكية + الموسيقى
   // ==========================================
   const weddingMusic = document.getElementById('weddingMusic');
 
@@ -178,14 +178,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (weddingMusic) {
       weddingMusic.volume = 0.6;
       weddingMusic.play().catch(error => {
-        console.log("تطلب المتصفح تفاعلاً تشغيل الصوت:", error);
+        console.log("تطلب المتصفح تفاعلاً لتشغيل الصوت:", error);
       });
     }
   }
 
   function openMainGate() {
     const cinematicGate = document.getElementById('cinematicGate');
-    
     playWeddingMusic();
 
     if (!cinematicGate || cinematicGate.classList.contains('open')) return;
@@ -266,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
   handleScrollAnimation();
 
   // ==========================================
-  // 7. العداد التنازلي (محادث ليكون 1000ms بدقة)
+  // 7. العداد التنازلي
   // ==========================================
   const weddingDate = new Date('July 27, 2027 20:00:00').getTime();
 
@@ -296,15 +295,14 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCountdown();
 
   // ==========================================
-  // 8. دفتر التهاني (مربوط بسيرفر سحابي لكل الأجهزة والمتصفحات)
+  // 8. دفتر التهاني المربوط بسيرفر مباشر (مفتوح للجميع)
   // ==========================================
   const wishesForm = document.getElementById('wishesForm');
   const wishesList = document.getElementById('wishesList');
   const ADMIN_PASSWORD = "1234";
 
-  // سيرفر مجاني مخصص لحفظ التهاني عالمياً
-  const API_URL = "https://api.jsonbin.io/v3/b/66b1a8d0e41b4d34e41a8e99"; 
-  const MASTER_KEY = "$2a$10$w8uM.K8d4M3I.yE5J.q3.uOaE0/G3L5vKx.qG1w8/e1s1";
+  // سيرفر مجاني مباشر للتهاني (صندوق خاص بالموقع)
+  const API_ENDPOINT = "https://crudcrud.com/api/a301d009e39b4b0cb901e1948bd6ddf2/wedding_wishes";
 
   let savedWishes = [];
 
@@ -314,33 +312,14 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   }
 
-  // 📥 جلب التهاني المسجلة من السيرفر عند فتح الصفحة
+  // 📥 جلب كل التهاني من السيرفر لعرضها لكل الموبايلات
   async function fetchWishes() {
     try {
-      const res = await fetch(API_URL + '/latest', {
-        headers: { 'X-Master-Key': MASTER_KEY }
-      });
-      const data = await res.json();
-      savedWishes = data.record.wishes || [];
-      renderWishes();
-    } catch (err) {
-      console.log("استرجاع التهاني المحلية:", err);
-      savedWishes = JSON.parse(localStorage.getItem('wedding_wishes')) || [];
-      renderWishes();
-    }
-  }
-
-  // 📤 حفظ ومزامنة التهاني على السيرفر لكل المتصفحات
-  async function syncWishesWithServer() {
-    try {
-      await fetch(API_URL, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Master-Key': MASTER_KEY
-        },
-        body: JSON.stringify({ wishes: savedWishes })
-      });
+      const response = await fetch(API_ENDPOINT);
+      if (response.ok) {
+        savedWishes = await response.json();
+        renderWishes();
+      }
     } catch (err) {
       console.error("خطأ في الاتصال بالسيرفر:", err);
     }
@@ -350,41 +329,49 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!wishesList) return;
     wishesList.innerHTML = '';
     
-    savedWishes.forEach((wish, index) => {
+    savedWishes.forEach((wish) => {
       const card = document.createElement('div');
       card.className = 'card wishes-card';
       card.innerHTML = `
-        <button class="delete-wish-btn" data-index="${index}" title="حذف التهنئة">🗑️</button>
+        <button class="delete-wish-btn" data-id="${wish._id}" title="حذف التهنئة">🗑️</button>
         <div class="wishes-author">${escapeHTML(wish.name)}</div>
         <p>${escapeHTML(wish.message)}</p>
       `;
       wishesList.prepend(card);
     });
 
-    // ربط زر الحذف بحذف التهنئة
     document.querySelectorAll('.delete-wish-btn').forEach(btn => {
       btn.addEventListener('click', function() {
-        const idx = parseInt(this.getAttribute('data-index'), 10);
-        deleteWish(idx);
+        const wishId = this.getAttribute('data-id');
+        deleteWish(wishId);
       });
     });
   }
 
-  // 🗑️ حذف الرسالة بكلمة السر
-  async function deleteWish(index) {
+  // 🗑️ حذف رسالة معينة من السيرفر بكلمة السر
+  async function deleteWish(id) {
     const password = prompt("أدخل الرقم السري لحذف هذه التهنئة:");
     if (password === ADMIN_PASSWORD) {
-      savedWishes.splice(index, 1);
-      localStorage.setItem('wedding_wishes', JSON.stringify(savedWishes));
-      renderWishes();
-      await syncWishesWithServer();
-      alert("تم حذف التهنئة بنجاح من المنصة.");
+      try {
+        const response = await fetch(`${API_ENDPOINT}/${id}`, {
+          method: 'DELETE'
+        });
+
+        if (response.ok) {
+          alert("تم حذف التهنئة بنجاح من جميع الأجهزة.");
+          fetchWishes(); // إعادة تحميل القائمة
+        } else {
+          alert("حدث خطأ أثناء الحذف!");
+        }
+      } catch (err) {
+        alert("تعذر الحذف، تحقق من الاتصال بالإنترنت.");
+      }
     } else if (password !== null) {
       alert("عذراً، الرقم السري غير صحيح!");
     }
   }
 
-  // ✉️ عند إرسال تهنئة جديدة
+  // 📤 إرسال تهنئة جديدة إلى السيرفر
   if (wishesForm) {
     wishesForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -396,24 +383,33 @@ document.addEventListener('DOMContentLoaded', () => {
         const message = msgInput.value.trim();
 
         if (name && message) {
-          const newWish = { name, message };
-          savedWishes.push(newWish);
-          
-          renderWishes();
-          wishesForm.reset();
-          triggerPetalBurst();
+          try {
+            const newWish = { name, message, date: new Date().toISOString() };
+            
+            const response = await fetch(API_ENDPOINT, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(newWish)
+            });
 
-          localStorage.setItem('wedding_wishes', JSON.stringify(savedWishes));
-          await syncWishesWithServer();
+            if (response.ok) {
+              wishesForm.reset();
+              triggerPetalBurst();
+              fetchWishes(); // تحديث فوري للشاشة
 
-          setTimeout(() => {
-            alert('شكراً لك! تم إرسال تهنئتك وحفظها على المنصة للجميع ❤️');
-          }, 300);
+              setTimeout(() => {
+                alert('شكراً لك! تم نشر تهنئتك لجميع الزوار ❤️');
+              }, 300);
+            }
+          } catch (err) {
+            alert('حدث خطأ أثناء إرسال التهنئة، تأكد من الاتصال.');
+          }
         }
       }
     });
   }
 
-  // تشغيل جلب الرسائل فور التحميل
+  // تشغيل الجلب التلقائي والتحديث بانتظام كل 5 ثوانٍ لظهور الرسائل للجميع فوراً
   fetchWishes();
+  setInterval(fetchWishes, 5000);
 });
