@@ -94,7 +94,7 @@
     <!-- قسم الترحيب الرئيسي + تفاصيل الحفل والعداد التنازلي -->
     <section id="hero">
       <div class="bismillah">بسم الله الرحمن الرحيم</div>
-	<div class="bismillah">{وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ}</div>
+      <div class="bismillah">{وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ}</div>
 
       <h2>يسرنا دعوتكم لحضور حفل زفاف</h2>
       <h1 class="main-names">عبدالرحمن ❤️ مايا</h1>
@@ -139,7 +139,7 @@
       <div class="intro-block">
         <p class="subtitle-text">بداية رحلة جديدة ملؤها الحب والمودة ✨</p>
         <div class="single-photo-container scroll-animate">
-          <img src="assets/gallery/eng-5.jpg" alt="بداية رحلة جديدة" class="centered-photo">
+          <img src="assets/gallery/eng-5.jpg" onerror="this.onerror=null; this.src='assets/gallery/eng-5.jpg';" alt="بداية رحلة جديدة" class="centered-photo">
         </div>
       </div>
 
@@ -149,16 +149,16 @@
         
         <div class="vertical-photos-list">
           <div class="photo-wrapper scroll-animate">
-            <img src="assets/gallery/eng-1.jpg" alt="لحظات متميزة 1" class="centered-photo">
+            <img src="assets/gallery/eng-1.jpg" onerror="this.onerror=null; this.src='assets/gallery/eng-1.jpg';" alt="لحظات متميزة 1" class="centered-photo">
           </div>
           <div class="photo-wrapper scroll-animate">
-            <img src="assets/gallery/eng-2.jpg" alt="لحظات متميزة 2" class="centered-photo">
+            <img src="assets/gallery/eng-2.jpg" onerror="this.onerror=null; this.src='assets/gallery/eng-2.jpg';" alt="لحظات متميزة 2" class="centered-photo">
           </div>
           <div class="photo-wrapper scroll-animate">
-            <img src="assets/gallery/eng-3.jpg" alt="لحظات متميزة 3" class="centered-photo">
+            <img src="assets/gallery/eng-3.jpg" onerror="this.onerror=null; this.src='assets/gallery/eng-3.jpg';" alt="لحظات متميزة 3" class="centered-photo">
           </div>
           <div class="photo-wrapper scroll-animate">
-            <img src="assets/gallery/eng-4.jpg" alt="لحظات متميزة 4" class="centered-photo">
+            <img src="assets/gallery/eng-4.jpg" onerror="this.onerror=null; this.src='assets/gallery/eng-4.jpg';" alt="لحظات متميزة 4" class="centered-photo">
           </div>
         </div>
       </div>
@@ -189,15 +189,16 @@
     <p class="copyright">© 2027 جميع الحقوق محفوظة</p>
   </footer>
 
+  <!-- عنصر خلفية الموسيقى -->
+  <audio id="weddingMusic" loop preload="auto">
+    <source src="assets/music/sound.mp3" type="audio/mpeg">
+    عذراً، متصفحك لا يدعم تشغيل الملفات الصوتية.
+  </audio>
+
+  <!-- مكتبات فايربيز والسكربت (في النهاية لضمان عمل التحميل بدون تعليق) -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
   <script src="script.js"></script>
-<!-- عنصر خلفية الموسيقى -->
-<audio id="weddingMusic" loop preload="auto">
-  <source src="assets/music/The-Wedding.Cinematic Music By Brian Withycombe.mp3" type="audio/mpeg">
-  عذراً، متصفحك لا يدعم تشغيل الملفات الصوتية.
-<!-- زر التحكم بالموسيقى العائم -->
-<button id="toggleMusicBtn" class="music-toggle-btn" title="كتم / تشغيل الموسيقى" aria-label="Toggle Audio">
-  <span id="musicIcon">🔊</span>
-</button>
-</audio>
+
 </body>
 </html>
