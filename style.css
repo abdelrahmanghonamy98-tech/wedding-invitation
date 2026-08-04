@@ -629,60 +629,69 @@ footer h3 { color: var(--primary-gold); margin-bottom: 5px; }
 }
 
 /* ==========================================
-   11. تأثير الورق اللميع (Confetti/Glitter) للتهنئة
+   11. /* ==========================================
+   تأثير اللميع والورود بطيئة الحركة (Slow Motion)
    ========================================== */
-.glitter-particle {
-  position: absolute;
-  top: -20px;
-  z-index: 9999 !important;
+.flowers-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   pointer-events: none;
-  animation: fallGlitter linear forwards;
-  box-shadow: 0 0 10px currentColor;
+  z-index: 9999;
+  overflow: hidden;
 }
 
-@keyframes fallGlitter {
+.petal.burst-petal {
+  position: absolute;
+  border-radius: 12px 0px 12px 0px;
+  background: linear-gradient(135deg, #fce4ec, #f8bbd0, #e8b4b8);
+  opacity: 0.85;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  animation: fallSlowMotion linear forwards;
+}
+
+@keyframes fallSlowMotion {
   0% {
-    transform: translateY(0) rotate(0deg) scale(1);
-    opacity: 1;
+    transform: translateY(0) rotate(0deg) translateX(0);
+    opacity: 0;
   }
-  80% {
+  10% {
     opacity: 0.9;
   }
+  90% {
+    opacity: 0.8;
+  }
   100% {
-    transform: translateY(115vh) rotate(1080deg) scale(0.3);
+    transform: translateY(110vh) rotate(540deg) translateX(60px);
     opacity: 0;
   }
 }
-/* ==========================================
-   زر كتم / تشغيل الموسيقى العائم
-   ========================================== */
-.music-toggle-btn {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  z-index: 1001;
-  width: 48px;
-  height: 48px;
+
+.glitter-gold {
+  position: absolute;
+  z-index: 9999;
+  pointer-events: none;
   border-radius: 50%;
-  background: linear-gradient(135deg, #d4af37, #c5a059);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  color: #fff;
-  font-size: 1.3rem;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  outline: none;
+  background-color: #ffd700;
+  box-shadow: 0 0 8px #ffd700, 0 0 15px #c5a059;
+  animation: fallGlitterSlow linear forwards;
 }
 
-.music-toggle-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(197, 160, 89, 0.8);
-}
-
-.music-toggle-btn.muted {
-  background: #777;
-  opacity: 0.8;
+@keyframes fallGlitterSlow {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(110vh) rotate(720deg) scale(0.3);
+    opacity: 0;
+  }
 }
